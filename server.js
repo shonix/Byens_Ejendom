@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 var BodyParser = require('body-parser')
 
-var url = 'mongodb://localhost:27017/byensejendom/newsletter';
+var url = 'mongodb://localhost:27017/byensejendom';
 
 app.use(BodyParser.urlencoded({
     extended : true
