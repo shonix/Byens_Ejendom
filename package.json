@@ -1,0 +1,19 @@
+{
+  "name": "byensejendom",
+  "version": "1.0.0",
+  "description": "Crud functionallity for a newsletter signup api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "newsletter",
+    "signup"
+  ],
+  "author": "Peter Raasthøj",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongodb": "^2.1.19"
+  }
+}
