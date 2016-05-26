@@ -11,22 +11,22 @@ app.use(BodyParser.urlencoded({
 }));
 app.use(BodyParser.json());
 
-app.get('/:id', function(req,res){
+app.get('/', function(req,res){
 
     MongoClient.connect(url, function(err, db){
        if(err){
            console.log(err);
-           res.status();
+           res.status(400);
            res.send();
        }
        var collection = db.collection('newsletter');
-       collection.find({}).toÁrray(function(err, data){
+       collection.find({}).toArray(function(err, data){
            if(err){
                console.log(err);
-               res.status();
+               res.status(400);
                res.send();
            }
-           consol.log(data);
+           console.log(data);
            res.send(data)
            db.close();
        })
@@ -38,17 +38,16 @@ app.post('/', function(req,res){
     MongoClient.connect(url, function(err, db){
         if(err){
             console.log(err);
-            res.status();
-            res.send();
+
         }
         var collection = db.collection('newsletter');
         collection.insertOne(req.body, function(err, data){
             if(err){
                 console.log(err);
-                res.status();
+                res.status(400);
                 res.send();
             }
-            res.status();
+            res.status(200);
             res.send();
             db.close();
         })
@@ -67,10 +66,10 @@ app.put('/:id', function(req, res){
         collection.updateOne({"_id":objectID}, {$set:req.body} , function(err, data){
             if(err){
                 console.log(err);
-                res.status();
+                res.status(400);
                 res.send();
             }
-            res.status();
+            res.status(200);
             res.send();
             db.close();
         })
@@ -81,7 +80,7 @@ app.delete('/:id', function(req, res){
     MongoClient.connect(url, function(err, db){
         if(err){
             console.log(err);
-            res.status();
+            res.status(400);
             res.send();
         }
         var collection = db.collection('newsletter');
@@ -89,10 +88,10 @@ app.delete('/:id', function(req, res){
         collection.deleteOne({"_id":objectID}, function(err, data){
             if(err){
                 console.log(err);
-                res.status();
+                res.status(400);
                 res.send();
             }
-            res.status();
+            res.status(200);
             res.send();
             db.close();
         })
