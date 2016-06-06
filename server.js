@@ -11,54 +11,74 @@ app.use(BodyParser.urlencoded({
 }));
 app.use(BodyParser.json());
 
+//MongoDB
+//use byensejendom
+//db.newsletter.find()
+
 app.get('/', function(req,res){
 
     MongoClient.connect(url, function(err, db){
        if(err){
            console.log(err);
-           res.status(400);
+           res.status(500);
            res.send();
        }
        var collection = db.collection('newsletter');
        collection.find({}).toArray(function(err, data){
            if(err){
                console.log(err);
-               res.status(400);
+               res.status(500);
                res.send();
            }
-           console.log(data);
-           res.send(data)
+           else{
+               console.log(data);
+               res.status(200);
+               res.send(data)
+           }
            db.close();
        })
     });
 });
+
+//MongoDB
+//use byensejendom
+//db.newsletter.insert({})
 
 app.post('/', function(req,res){
 
     MongoClient.connect(url, function(err, db){
         if(err){
             console.log(err);
+            res.status(500);
+            res.send();
 
         }
         var collection = db.collection('newsletter');
         collection.insertOne(req.body, function(err, data){
             if(err){
                 console.log(err);
-                res.status(400);
+                res.status(500);
                 res.send();
             }
-            res.status(200);
-            res.send();
+            else{
+                res.status(201);
+                res.send();
+            }
             db.close();
         })
     });
 });
 
+
+//MongoDB
+//use byensejendom
+//db.newsletter.update({}, {$set: {}})
+
 app.put('/:id', function(req, res){
     MongoClient.connect(url, function(err, db){
         if(err){
             console.log(err);
-            res.status();
+            res.status(500);
             res.send();
         }
         var objectID= new ObjectID(req.params.id);
@@ -66,21 +86,27 @@ app.put('/:id', function(req, res){
         collection.updateOne({"_id":objectID}, {$set:req.body} , function(err, data){
             if(err){
                 console.log(err);
-                res.status(400);
+                res.status(500);
                 res.send();
             }
-            res.status(200);
-            res.send();
+            else{
+                res.status(200);
+                res.send();
+            }
             db.close();
         })
     });
 });
 
+//MongoDB
+//use byensejendom
+//db.newsletter.remove({})
+
 app.delete('/:id', function(req, res){
     MongoClient.connect(url, function(err, db){
         if(err){
             console.log(err);
-            res.status(400);
+            res.status(500);
             res.send();
         }
         var collection = db.collection('newsletter');
@@ -88,13 +114,22 @@ app.delete('/:id', function(req, res){
         collection.deleteOne({"_id":objectID}, function(err, data){
             if(err){
                 console.log(err);
-                res.status(400);
+                res.status(500);
                 res.send();
             }
-            res.status(200);
-            res.send();
+            else{
+                res.status(204);
+                res.send();
+            }
             db.close();
         })
     });
 });
+
+//Make use of more than one js file
+//var users = require('./routes/users.js');
+//app.use('/api/', users);
+
+
+
 app.listen(3000);// set server to listen
