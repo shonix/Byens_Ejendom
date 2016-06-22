@@ -118,7 +118,7 @@ app.delete('/:id', function(req, res){
                 res.send();
             }
             else{
-                res.status(204);
+                res.status(200);
                 res.send();
             }
             db.close();
@@ -129,6 +129,15 @@ app.delete('/:id', function(req, res){
 //Make use of more than one js file
 //var users = require('./routes/users.js');
 //app.use('/api/', users);
+//router.route('/users/')
+//.get(function(req, res) {
+//module.exports = router; -->require
+
+//static access
+//app.use(express.static('public'));
+//http://localhost:3000/images/kitten.jpg
+
+
 
 
 
